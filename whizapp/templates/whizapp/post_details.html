@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Post Page</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <nav class="navbar navbar-expand-sm bg-info navbar-dark">
+            <a class="navbar-brand" href="#">Whiz</a>
+            <form method="post" action="{% url 'logout' %}" id="logout_form" class="ml-auto">
+                {% csrf_token %}
+                <input class="btn btn-block py-2  font-weight-bold" type="submit" value="Logout" style="width: fit-content;color: white;"/>
+            </form>
+    </nav>
+    <div style="margin: 1%;">
+        <div id="title" style="border: 1px solid black;padding: 1%;margin: 1% 0%;border-radius: 1%;padding-bottom: 2%;">
+            <h5 style="float: left;">{{ post.title }}</h5>
+            <span style="float: right;color: #17a2b8;">By&nbsp{{ post.user.first_name }}{{ post.user.last_name }}</span><br>
+            <span style="float: right;font-size: 10px;">{{ post.timestamp }}</span><br>
+            {{ post.description|linebreaks }}<br>
+            <div style="text-align: center;">
+                {% if images %}
+                {% for item in images %}
+                    <img src="{{ item.image.url }}" alt="{{ item.post.title }}"><br>
+                {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+<!--        <label for="desc"><h4>Description </h4></label>-->
+<!--        <div id="desc" style="border: 1px solid black;padding: 1%;margin: 1% 0%;border-radius: 1%;">-->
+
+<!--            -->
+
+<!--        </div>-->
+        <div style="padding: 1% 2%;font-weight: 600;font-size: 18px;">{{ count }}&nbsp;Answers</div>
+        <hr>
+        {% for comment in comments %}
+        <div style="padding: 1%;">
+            {{ comment.description|linebreaks }}
+            <span style="float: right;color: #17a2b8;">By&nbsp{{ comment.user.first_name }}{{ comment.user.last_name }}</span><br>
+            <span style="float: right;font-size: 10px;">{{ comment.timestamp }}</span><br>
+            <div style="padding: 1% 10%;font-size: 12px;">
+                {% for cmt,item in reply.items %}
+                    {% ifequal cmt comment.cid %}
+                        {% if item %}<hr>
+                            {% for i in item %}
+                                {{ i.text|linebreaks }}
+                                <div style="float: right;color: #17a2b8;font-size: 10px;">{{ i.user.first_name }}{{ i.user.last_name }}&nbsp;{{ i.timestamp }}</div><br>
+                                <hr>
+                            {% endfor %}
+                        {% endif %}
+                    {% endifequal %}
+                {% endfor %}
+                <form method="post" action="{% url 'reply' post.qid comment.cid %}">
+                    {% csrf_token %}
+                    <textarea placeholder="Reply to this answer" name="reply" class="form-control" rows="2" id="reply" cols="10"></textarea>
+                    <br>
+                    <button type="submit" class="save btn btn-primary" style="float: right;">Reply</button>
+                </form><br>
+            </div>
+            <hr>
+        </div>
+        {% endfor %}
+        <form method="post" action="{% url 'post_detail' post.qid %}" enctype='multipart/form-data'>
+            {% csrf_token %}
+            <label for="comment"><h5>Your answer</h5></label>
+            <textarea placeholder="Your Comment here..." name="comment" class="form-control" rows="10" id="comment" cols="10"></textarea>
+            <br>
+            <div class="" style="float: left;">
+                    <input id="images" name="images" type="file" multiple>
+            </div>
+            <button type="submit" class="save btn btn-primary" style="float: right;">Post yout answer</button>
+        </form>
+
+
+    </div>
+</body>
+</html>
