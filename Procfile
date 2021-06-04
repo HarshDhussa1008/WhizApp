@@ -1,1 +1,1 @@
-web: gunicorn whiz.wsgi --log-file -
+web: gunicorn whiz.wsgi:application
