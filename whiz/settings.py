@@ -37,6 +37,7 @@ SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
 SESSION_EXPIRE_AT_BROWSER_CLOSE=True
 os.environ['HTTPS'] = "on"
+SOCIAL_AUTH_REDIRECT_IS_HTTPS = True 
 
 # Application definition
 
