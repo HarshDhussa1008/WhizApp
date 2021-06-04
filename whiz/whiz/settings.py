@@ -183,6 +183,8 @@ EMAIL_PORT = 587
 EMAIL_HOST_USER = 'ekanshkumar846@gmail.com'
 EMAIL_HOST_PASSWORD = 'goforitdude'
 
+django_heroku.settings(locals())
+
 # EMAIL_FROM_ADDRESS = 'ekanshkumar846@gmail.com'
 # EMAIL_MAIL_SUBJECT = 'Password Reset'
 # EMAIL_MAIL_HTML = 'whizapp/mail_body.html'
