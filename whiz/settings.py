@@ -30,6 +30,7 @@ SECRET_KEY = 'django-insecure-99l=0)0t4254y=q0te5w7z9v2cz^ch22e#g^kl!57h8h8b*3r%
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
+DEBUG_PROPAGATE_EXCEPTIONS = True
 
 ALLOWED_HOSTS = ['.herokuapp.com']
 
@@ -99,7 +100,8 @@ DATABASES = {
 }
 
 WHITENOISE_USE_FINDERS = True
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
 
 
 # Password validation
