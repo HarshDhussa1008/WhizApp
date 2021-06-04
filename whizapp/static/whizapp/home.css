@@ -1,0 +1,28 @@
+.table{
+    border-radius: 50%;
+}
+.bar{
+    width: 90%;
+    margin: 3% auto;
+    border-radius: 10px;
+    border: 1px solid skyblue;
+
+}
+.bar:hover{
+    border: 2px solid skyblue;
+}
+#search{
+    width: 97%;
+    margin: 0 auto;
+    height: 50px;
+    border: none;
+    border-radius: 10px;
+    border-left: 0px solid skyblue;
+    padding: 2%;
+}
+#search:focus{
+    outline: none;
+}
+.fa{
+    color: #007bff;
+}
