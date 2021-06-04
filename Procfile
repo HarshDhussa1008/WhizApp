@@ -1,0 +1,1 @@
+web: gunicorn whiz.wsgi --log-file -
