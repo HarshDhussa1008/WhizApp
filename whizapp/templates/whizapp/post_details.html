@@ -55,16 +55,22 @@
                         {% endif %}
                     {% endifequal %}
                 {% endfor %}
+                {% if user.is_authenticated %}
                 <form method="post" action="{% url 'reply' post.qid comment.cid %}">
                     {% csrf_token %}
                     <textarea placeholder="Reply to this answer" name="reply" class="form-control" rows="2" id="reply" cols="10"></textarea>
                     <br>
                     <button type="submit" class="save btn btn-primary" style="float: right;">Reply</button>
                 </form><br>
+                {% else %}
+                <a href="{% url 'login' %}">Login</a> to Reply to this comment.
+                {% endif %}
+                
             </div>
             <hr>
         </div>
         {% endfor %}
+        {% if user.is_authenticated %}
         <form method="post" action="{% url 'post_detail' post.qid %}" enctype='multipart/form-data'>
             {% csrf_token %}
             <label for="comment"><h5>Your answer</h5></label>
@@ -75,7 +81,9 @@
             </div>
             <button type="submit" class="save btn btn-primary" style="float: right;">Post yout answer</button>
         </form>
-
+        {% else %}
+        <a href="% url 'login' %">Login</a> to Answer this question.
+        {% endif %}
 
     </div>
 </body>
