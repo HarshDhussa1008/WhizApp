@@ -128,12 +128,14 @@ def post_detail(request,qid):
 
 
 def reply(request,qid,cid):
-    post=Question.objects.get(qid=qid)
-    user=request.user
-    cmnt=Comment.objects.get(cid=cid)
-    text=request.POST.get('reply')
-    CommentReply.objects.create(comment=cmnt,text=text,user=user)
-    return  redirect('post_detail',qid)
+    if request.method == 'POST':
+        post=Question.objects.get(qid=qid)
+        user=request.user
+        cmnt=Comment.objects.get(cid=cid)
+        text=request.POST.get('reply')
+        CommentReply.objects.create(comment=cmnt,text=text,user=user)
+        return  redirect('post_detail',qid)
+    return redirect('index')
 
 
 def forget(request):
@@ -177,6 +179,7 @@ def reset(request,hash):
     return render(request,'whizapp/reset.html',context)
 
 
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def logout(request):
     if request.method=='POST':
         auth.logout(request)
