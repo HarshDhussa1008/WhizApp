@@ -63,7 +63,7 @@
                 {% if user.is_authenticated %}
                 <form method="post" action="{% url 'reply' post.qid comment.cid %}">
                     {% csrf_token %}
-                    <textarea placeholder="Reply to this answer" name="reply" class="form-control" rows="2" id="reply" cols="10"></textarea>
+                    <textarea placeholder="Reply to this answer" name="reply" class="form-control" rows="2" id="reply" cols="10" required></textarea>
                     <br>
                     <button type="submit" class="save btn btn-primary" style="float: right;">Reply</button>
                 </form><br>
@@ -79,7 +79,7 @@
         <form method="post" action="{% url 'post_detail' post.qid %}" enctype='multipart/form-data'>
             {% csrf_token %}
             <label for="comment"><h5>Your answer</h5></label>
-            <textarea placeholder="Your Comment here..." name="comment" class="form-control" rows="10" id="comment" cols="10"></textarea>
+            <textarea placeholder="Your Comment here..." name="comment" class="form-control" rows="10" id="comment" cols="10" required></textarea>
             <br>
             <div class="" style="float: left;">
                     <input id="images" name="images" type="file" multiple>
