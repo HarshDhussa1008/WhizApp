@@ -96,7 +96,7 @@ def home(request):
     return render(request, 'whizapp/home.html', context)
 
 
-# @cache_control(no_cache=True, must_revalidate=True, no_store=True)
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
 # @login_required(login_url='/login/')
 def post_detail(request,qid):
     context={}
