@@ -81,7 +81,7 @@ def home(request):
         title=request.POST.get('title')
         images = request.FILES.getlist('images')
         dept= request.POST.get('sel1')
-        if desc:
+        if title and dept:
             print('data valid')
             print(images)
             ques_obj=Question.objects.create(user=user,description=desc,title=title,department=dept)
