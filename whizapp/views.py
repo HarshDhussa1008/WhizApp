@@ -80,10 +80,11 @@ def home(request):
         desc=request.POST.get('description')
         title=request.POST.get('title')
         images = request.FILES.getlist('images')
+        dept= request.POST.get('sel1')
         if desc:
             print('data valid')
             print(images)
-            ques_obj=Question.objects.create(user=user,description=desc,title=title)
+            ques_obj=Question.objects.create(user=user,description=desc,title=title,department=dept)
             for image in images:
                 photo = QuestionImages.objects.create(image=image,post=ques_obj)
                 photo.save()
