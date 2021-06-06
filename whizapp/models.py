@@ -18,7 +18,7 @@ class Question(models.Model):
     description=models.TextField()
     user=models.ForeignKey(User,on_delete=models.CASCADE)
     timestamp=models.DateTimeField(auto_now_add=True)
-    department=models.CharField(max_length=50,defualt='CS')
+    department=models.CharField(max_length=50,default='CS')
     status=models.CharField(default='Pending',max_length=50)
 
     def __str__(self):
