@@ -24,6 +24,15 @@ def mailer(user):
     link={'user': user.email}
     html_message = render_to_string('whizapp/confirm_template.html', {'link': signer.sign_object(link)})
     send_mail(subject, message, 'WhizApp '+email_from, recipient_list, html_message=html_message)
+    
+def ans_mailer(user,qid):
+    subject = 'WhizApp Answer Notification'
+    message = f'Hey {user.first_name} Your question just got answered'
+    email_from = settings.EMAIL_HOST_USER
+    recipient_list = [user.email]
+    link={'link': 'https://whizapp.herokuapp.com/home/'+qid}
+    html_message = render_to_string('whizapp/answer_template.html', link)
+    send_mail(subject, message, 'WhizApp '+email_from, recipient_list, html_message=html_message)
 
 
 def index(request):
@@ -123,6 +132,8 @@ def post_detail(request,qid):
             for image in images:
                 photo = CommentImages.objects.create(image=image, post=comm_obj)
                 photo.save()
+            user=User.objects.get(email=request.user.email)
+            ans_mailer(user,qid)
             return redirect('post_detail', qid)
 
     return render(request,'whizapp/post_details.html',context)
