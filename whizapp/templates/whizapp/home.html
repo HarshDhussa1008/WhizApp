@@ -49,13 +49,13 @@
             {% csrf_token %}
             <div class="">
                 <label for="title"><h4>Didn't find one? Ask here and get it answered.</h4></label>
-                <textarea placeholder="Title of the Question" name="title" class="form-control" rows="2" id="title" cols="10"></textarea><br>
+                <textarea placeholder="Title of the Question" name="title" class="form-control" rows="2" id="title" cols="10" required></textarea><br>
                 <textarea placeholder="Description of the Question" name="description" class="form-control" rows="10" id="description" cols="10"></textarea>
                 <div class="" style="float: left;"><br>
                     <input id="images" name="images" type="file" multiple >
                 </div>
                 <br>
-                <select class="form-control" id="sel1" name="sel1">
+                <select class="form-control" id="sel1" name="sel1" required>
                     <option>Select Department</option>
                     <option>CS</option>
                     <option>IT</option>
