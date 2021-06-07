@@ -54,10 +54,11 @@ def index(request):
 def login(request):
     if request.method == 'POST':
         # print(request.POST['email'],request.POST['password'])
+        user=User.objects.get(email=request.POST['email'])
+        if not user.is_active:
+                return render(request, 'whizapp/login.html', {'error': 'Please verify your account to continue!'})
         user = auth.authenticate(request, username=request.POST['email'], password=request.POST['password'])
         if user is not None:
-            if not user.is_active:
-                return render(request, 'whizapp/login.html', {'error': 'Please verify your account to continue!'})
             print('user exists')
             auth.login(request, user)
             try:
