@@ -223,7 +223,7 @@ def confirm(request,hash=None):
     if hash:
         mailid=signer.unsign_object(hash)
         print(mailid)
-        user=User.objects.get(email=mailid)
+        user=User.objects.get(email=mailid['user'])
         user.is_active=True
         user.save()
         return redirect('login')
