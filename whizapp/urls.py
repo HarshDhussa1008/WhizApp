@@ -13,6 +13,7 @@ urlpatterns = [
     path('home/<str:qid>/<str:cid>',views.reply,name='reply'),
     path('reset/<str:hash>', views.reset, name='reset'),
     path('forget/', views.forget, name='forget'),
+    path('verify/<str:hash>', views.confirm, name='verify'),
 
 ]
 urlpatterns += static(settings.MEDIA_URL,
