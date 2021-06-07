@@ -25,6 +25,15 @@ def mailer(user):
     html_message = render_to_string('whizapp/confirm_template.html', {'link': signer.sign_object(link)})
     send_mail(subject, message, 'WhizApp '+email_from, recipient_list, html_message=html_message)
     
+def cnf_mailer(user):
+    subject = 'WhizApp Account Verification'
+    message = f'Hi {user.first_name} Please click the below link to verify your email.'
+    email_from = settings.EMAIL_HOST_USER
+    recipient_list = [user.email]
+    link={'user': user.email}
+    html_message = render_to_string('whizapp/verify_template.html', {'link': signer.sign_object(link)})
+    send_mail(subject, message, 'WhizApp '+email_from, recipient_list, html_message=html_message)
+    
 def ans_mailer(user,qid):
     subject = 'WhizApp Answer Notification'
     message = f'Hey {user.first_name} Your question just got answered'
@@ -47,6 +56,8 @@ def login(request):
         # print(request.POST['email'],request.POST['password'])
         user = auth.authenticate(request, username=request.POST['email'], password=request.POST['password'])
         if user is not None:
+            if not user.is_active:
+                return render(request, 'whizapp/login.html', {'error': 'Please verify your account to continue!'})
             print('user exists')
             auth.login(request, user)
             try:
@@ -68,13 +79,14 @@ def signup(request):
         try:
             # print(request.POST)
             User.objects.get(username=request.POST.get('email'))
-            return render(request, 'whizapp/signup.html', {'error': 'Username is already taken!'})
+            return render(request, 'whizapp/signup.html', {'error': 'An account with this email already exists!'})
         except User.DoesNotExist:
             print('no user')
-            user = User.objects.create_user(first_name=request.POST['firstname'], last_name=request.POST['lastname'], password=request.POST['password'], username=request.POST['email'],email=request.POST['email'])
+            user = User.objects.create_user(first_name=request.POST['firstname'], last_name=request.POST['lastname'], password=request.POST['password'], username=request.POST['email'],email=request.POST['email'],is_active=False)
             print(user)
-            auth.login(request, user,backend='django.contrib.auth.backends.ModelBackend')
-            return redirect('home')
+            cnf_mailer(user)
+            #auth.login(request, user,backend='django.contrib.auth.backends.ModelBackend')
+            return redirect('login')
     return render(request, 'whizapp/signup.html')
 
 
@@ -204,3 +216,14 @@ def logout(request):
         print('loggd out')
         return redirect('index')
     return render(request, 'whizapp/index.html')
+
+
+def confirm(request,hash=None):
+    if hash:
+        mailid=signer.unsign_object(hash)
+        user=User.objects.get(email=mailid)
+        user.is_active=True
+        user.save()
+        return redirect('login')
+    return render(request,'whizapp/login.html')
+    
