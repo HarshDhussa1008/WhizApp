@@ -49,6 +49,12 @@ def login(request):
         if user is not None:
             print('user exists')
             auth.login(request, user)
+            try:
+                remember = request.POST['remember_me']
+                if remember:
+                    settings.SESSION_EXPIRE_AT_BROWSER_CLOSE = False
+            except MultiValueDictKeyError:
+                    settings.SESSION_EXPIRE_AT_BROWSER_CLOSE = True
             return redirect('home')
         else:
             print('incorrect credentials')
