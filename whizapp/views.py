@@ -53,7 +53,7 @@ def login(request):
                 remember = request.POST['remember_me']
                 if remember:
                     settings.SESSION_EXPIRE_AT_BROWSER_CLOSE = False
-            except MultiValueDictKeyError:
+            except:
                     settings.SESSION_EXPIRE_AT_BROWSER_CLOSE = True
             return redirect('home')
         else:
