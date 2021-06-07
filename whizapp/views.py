@@ -132,7 +132,7 @@ def post_detail(request,qid):
             for image in images:
                 photo = CommentImages.objects.create(image=image, post=comm_obj)
                 photo.save()
-            user=User.objects.get(email=request.user.email)
+            user=User.objects.get(email=post.user.email)
             ans_mailer(user,qid)
             return redirect('post_detail', qid)
 
