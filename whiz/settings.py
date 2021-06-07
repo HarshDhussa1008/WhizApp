@@ -191,7 +191,7 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 EMAIL_HOST_USER = 'jhonmoxley1008@gmail.com'
-EMAIL_HOST_PASSWORD = 'goforitdude'
+EMAIL_HOST_PASSWORD = 'Inspired@123'
 
 'whitenoise.django.GzipManifestStaticFilesStorage'
 
