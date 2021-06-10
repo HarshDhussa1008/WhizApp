@@ -109,7 +109,7 @@ def home(request):
     # print(request.user.is_staff)
     if request.user.is_staff:
         posts=Question.objects.all()
-        news_mailer(rquest.user,posts)
+        news_mailer(request.user,posts)
         return redirect('/admin/')
     if request.method == "POST":
         print('post data')
