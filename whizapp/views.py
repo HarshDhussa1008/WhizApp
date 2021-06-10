@@ -43,6 +43,14 @@ def ans_mailer(user,qid):
     html_message = render_to_string('whizapp/answer_template.html', link)
     send_mail(subject, message, 'WhizApp '+email_from, recipient_list, html_message=html_message)
 
+def news_mailer(user,posts):
+    subject = 'WhizApp Daily Newsletter'
+    message = f'Hey {user.first_name} We have something for you'
+    email_from = settings.EMAIL_HOST_USER
+    recipient_list = [user.email]
+    html_message = render_to_string('whizapp/answer_template.html', posts)
+    send_mail(subject, message, 'WhizApp '+email_from, recipient_list, html_message=html_message)
+
 
 def index(request):
     context={}
@@ -100,6 +108,8 @@ def home(request):
     form=QuestionForm()
     # print(request.user.is_staff)
     if request.user.is_staff:
+        posts=Question.objects.all()
+        news_mailer(user,posts)
         return redirect('/admin/')
     if request.method == "POST":
         print('post data')
