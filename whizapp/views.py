@@ -48,7 +48,7 @@ def news_mailer(user,posts):
     message = f'Hey {user.first_name} We have something for you'
     email_from = settings.EMAIL_HOST_USER
     recipient_list = [user.email]
-    html_message = render_to_string('whizapp/answer_template.html', {'posts':posts})
+    html_message = render_to_string('whizapp/newsletter.html', {'posts':posts})
     send_mail(subject, message, 'WhizApp '+email_from, recipient_list, html_message=html_message)
 
 
