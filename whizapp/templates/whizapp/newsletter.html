@@ -1,43 +1,19 @@
 <!DOCTYPE html>
-{% load static %}
+<!-- {% load static %} -->
 <html>
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Newsletter</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" media="screen" href="{% static 'whizapp/news.css' %}" />
+<!--     <link rel="stylesheet" type="text/css" media="screen" href="{% static 'whizapp/news.css' %}" /> -->
 </head>
 <body style="text-align: center;">
     <h2 style="color: blue">Daily Newsletter</h2>
     <div style="width: 100%;">
         {% for post in posts %}
-        <div class="post"><span><a href="https://whizapp.herokuapp.com/{{ post.qid }}">{{ post.title }}</a></span></div>
+        <div class="post" style='width: 80%;height: 50px;border: 1px solid black;margin: 25px auto;line-height: 50px;box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 10px;padding: 5px;border: 1px solid white;border-radius: 2%;'><span style='display: inline-block;vertical-align: middle;line-height: normal;font-size: 20px;'><a href="https://whizapp.herokuapp.com/{{ post.qid }}" style='text-decoration: none;color: black;'>{{ post.title }}</a></span></div>
         {% endfor %}
     </div>
 </body>
-<style>
-    .post {
-    width: 80%;
-    height: 50px;
-    border: 1px solid black;
-    margin: 25px auto;
-    line-height: 50px;
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 10px;
-    padding: 5px;
-    border: 1px solid white;
-    border-radius: 2%;
-}
-
-span {
-    display: inline-block;
-    vertical-align: middle;
-    line-height: normal;
-    font-size: 20px;
-}
-a{
-    text-decoration: none;
-    color: black;
-}
-</style>
 </html>
