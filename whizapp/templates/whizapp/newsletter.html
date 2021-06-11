@@ -12,7 +12,8 @@
     <h2 style="color: blue">Daily Newsletter</h2>
     <div style="width: 100%;">
         {% for post in posts %}
-        <div class="post" style='width: 80%;height: 50px;border: 1px solid black;margin: 25px auto;line-height: 50px;box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 10px;padding: 5px;border: 1px solid white;border-radius: 2%;'><span style='display: inline-block;vertical-align: middle;line-height: normal;font-size: 20px;'><a href="https://whizapp.herokuapp.com/{{ post.qid }}" style='text-decoration: none;color: black;'>{{ post.title }}</a></span></div>
+        <div class="post" style='width: 80%;height: 50px;border: 1px solid white !important;margin: 25px auto;line-height: 50px;box-shadow: rgba(0, 0, 0, 0.35) 0px 2px 2px !important;padding: 5px;border: 1px solid white;border-radius: 2%;'><span style='display: inline-block;vertical-align: middle;line-height: normal;font-size: 20px;'><a href="https://whizapp.herokuapp.com/home/{{ post.qid }}" style='text-decoration: none;color: black;text-transform: capitalize;'>{{ post.title }}</a></span></div>
+        <hr>
         {% endfor %}
     </div>
 </body>
