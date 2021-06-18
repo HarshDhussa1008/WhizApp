@@ -8,7 +8,8 @@ def user_notify(modeladmin, request, queryset):
     u=User.objects.all()
     for i in u:
       for q in queryset:
-        notify(i,q)
+        if u.is_staff:
+            notify(i,q)
     
 make_published.short_description = "Notify"
 
