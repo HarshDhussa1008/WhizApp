@@ -1,5 +1,6 @@
 from django.contrib import admin
 from .models import Question,Comment,CommentImages,QuestionImages,CommentReply
+from django.contrib.auth.models import User
 from .views import notify
 # Register your models here.
 
