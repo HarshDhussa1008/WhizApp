@@ -7,9 +7,8 @@ from .views import notify
 def user_notify(modeladmin, request, queryset):
     u=User.objects.all()
     for i in u:
-      for q in queryset:
-        if u.is_staff:
-            notify(i,q)
+        if i.is_staff:
+            notify(i,queryset)
     
 user_notify.short_description = "Notify"
 
