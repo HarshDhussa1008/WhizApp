@@ -15,9 +15,9 @@ from django.contrib.admin.views.decorators import staff_member_required
 
 
 @staff_member_required
-def notify(request,user):
+def notify(request):
     posts=Question.objects.all()
-    news_mailer(user,posts)
+    news_mailer(request.user,posts)
     return redirect('/admin/')
 
 # Create your views here.
