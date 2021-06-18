@@ -14,6 +14,7 @@ urlpatterns = [
     path('reset/<str:hash>', views.reset, name='reset'),
     path('forget/', views.forget, name='forget'),
     path('verify/<str:hash>', views.confirm, name='verify'),
+    path('notify', views.notify, name='notify'),
 
 ]
 urlpatterns += static(settings.MEDIA_URL,
