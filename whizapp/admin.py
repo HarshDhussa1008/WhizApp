@@ -11,7 +11,7 @@ def user_notify(modeladmin, request, queryset):
         if u.is_staff:
             notify(i,q)
     
-make_published.short_description = "Notify"
+user_notify.short_description = "Notify"
 
 class QuestionAdmin(admin.ModelAdmin):
   actions=[user_notify]
