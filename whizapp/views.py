@@ -11,6 +11,14 @@ from .models import Question,QuestionImages,CommentImages,Comment,CommentReply
 from django.core.mail import send_mail
 from django.core.signing import Signer
 from django.views.decorators.cache import cache_control
+from django.contrib.admin.views.decorators import staff_member_required
+
+
+@staff_member_required
+def notify(request):
+    posts=Question.objects.all()
+    news_mailer(request.user,posts)
+    return redirect('/admin/')
 
 # Create your views here.
 signer=Signer()
@@ -107,10 +115,6 @@ def home(request):
     context={}
     form=QuestionForm()
     # print(request.user.is_staff)
-    if request.user.is_staff:
-        posts=Question.objects.all()
-        news_mailer(request.user,posts)
-        return redirect('/admin/')
     if request.method == "POST":
         print('post data')
         print(request.POST.dict())
